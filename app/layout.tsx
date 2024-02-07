@@ -1,8 +1,10 @@
+// "use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Navbar";
-import { NextUIProvider } from "@nextui-org/react";
+import WrapNextUI from "./components/WrapNextUI";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +20,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Nav />
-        {children}
-      </body>
+      <WrapNextUI>
+        <body className={inter.className}>
+          <div>
+            <Nav />
+            <div className="flex flex-row min-h-screen">
+              <Sidebar />
+              {children}
+            </div>
+          </div>
+        </body>
+      </WrapNextUI>
     </html>
   );
 }
